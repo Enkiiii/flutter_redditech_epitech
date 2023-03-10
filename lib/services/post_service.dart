@@ -101,8 +101,11 @@ class PostService {
         throw Exception("Error getting posts");
       }
       Map<String, dynamic> body = jsonDecode(res.body);
-      inspect(body);
       List<SubredditSearchModel> subreddits = [];
+      for (Map<String, dynamic> subreddit in body["data"]["children"]) {
+        subreddits.add(SubredditSearchModel.fromJson(subreddit));
+      }
+
       return subreddits;
     } catch (e) {
       if (kDebugMode) {

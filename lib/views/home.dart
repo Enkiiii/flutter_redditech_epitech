@@ -32,9 +32,17 @@ class HomePage extends StatelessWidget {
                 tooltip: 'Search',
                 onPressed: () async {
                   final res = await PostService().getAutocomplete();
-                  final result = await showSearch(
+                  final String? result = await showSearch<String>(
                       context: context,
                       delegate: SubredditSearch(subreddits: res));
+                  if (result != null && result.isNotEmpty && result != 'Done') {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SubRedditPage(title: result),
+                      ),
+                    );
+                  }
                   // storage.setItem('subreddit', result.toString());
                   // Navigator.pushNed(context, '/subreddit');
                 },
