@@ -130,12 +130,15 @@ class PostService {
           'Authorization': 'Bearer $token',
         },
       );
+      
       if (res.statusCode != 200) {
         throw Exception("Error getting subreddit");
       }
+
       Map<String, dynamic> body = jsonDecode(res.body);
       final SubredditModel sub = SubredditModel.fromJson(body);
       return sub;
+
     } catch (e) {
       if (kDebugMode) {
         print(e);

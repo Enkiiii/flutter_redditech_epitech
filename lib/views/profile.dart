@@ -1,10 +1,21 @@
+class Profile extends StatefulWidget {
+  const Profile({super.key, required this.username});
 
+  final String username;
 
-// class Profile extends StatelessWidget {
-//   const Profile({super.key});
+  @override
+  State<Profile> createState() => _ProfileState();
+}
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container();
-//   }
-// }
+class _ProfileState extends State<Profile> {
+  Profile? profile;
+
+  getProfile() async {
+    final res = await 
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}

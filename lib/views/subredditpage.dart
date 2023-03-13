@@ -47,7 +47,7 @@ class _SubRedditPageState extends State<SubRedditPage> {
               Image.network(subreddit!.bannerBackgroundImage),
               Image.network(subreddit!.communityIcon),
             ],
-          )
+          ),
     );
   }
 }
