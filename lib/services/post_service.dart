@@ -7,6 +7,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/subreddit_search_model.dart';
+import '../models/subreddits_model.dart';
 
 class PostService {
   Future<List<PostsModel>> getPosts(String status) async {
@@ -115,8 +116,31 @@ class PostService {
     }
   }
 
-  
-
-
-
+  Future<SubredditModel> getSubReddit(String title) async {
+    try {
+      String? token =
+          (await const FlutterSecureStorage().read(key: "token")) ?? "";
+      String url = "https://oauth.reddit.com/$title/about";
+      http.Response res = await http.get(
+        Uri.parse(url),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'User-Agent': 'Redditech:1234:1.0 (by /u/RichiePo99>)',
+          'Authorization': 'Bearer $token',
+        },
+      );
+      if (res.statusCode != 200) {
+        throw Exception("Error getting subreddit");
+      }
+      Map<String, dynamic> body = jsonDecode(res.body);
+      final SubredditModel sub = SubredditModel.fromJson(body);
+      return sub;
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      throw Exception("Error getting subreddit");
+    }
+  }
 }
