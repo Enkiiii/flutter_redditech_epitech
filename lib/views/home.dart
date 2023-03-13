@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redditech_epitech/models/post_model.dart';
 import 'package:flutter_redditech_epitech/services/post_service.dart';
-import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter_redditech_epitech/utils/subreddit_search.dart';
+import 'package:flutter_redditech_epitech/views/subredditpage.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
