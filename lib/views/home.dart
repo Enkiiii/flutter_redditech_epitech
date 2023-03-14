@@ -55,20 +55,43 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: Icon(Icons.local_fire_department),
-                  label: Text("Hot")),
+                onPressed: () {},
+                icon: Icon(Icons.local_fire_department),
+                label: Text("Hot"),
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Color.fromARGB(255, 57, 53, 49),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(5.0, 0, 5.0, 0),
                 child: ElevatedButton.icon(
-                    onPressed: () {},
-                    icon: Icon(Icons.new_releases),
-                    label: Text("New")),
+                  onPressed: () {},
+                  icon: Icon(Icons.new_releases),
+                  label: Text("New"),
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Color.fromARGB(255, 57, 53, 49),
+                  ),
+                ),
               ),
-              ElevatedButton.icon(
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                child: ElevatedButton.icon(
                   onPressed: () {},
                   icon: Icon(Icons.favorite),
-                  label: Text("Subscribed")),
+                  label: Text("Sub"),
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Color.fromARGB(255, 57, 53, 49),
+                  ),
+                ),
+              ),
+              ElevatedButton.icon(
+                onPressed: () {},
+                icon: Icon(Icons.account_circle),
+                label: Text("Profile"),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 57, 53, 49),
+                    foregroundColor: Color.fromARGB(255, 255, 153, 0)),
+              ),
             ],
           ),
           FutureBuilder<List<PostsModel>>(
