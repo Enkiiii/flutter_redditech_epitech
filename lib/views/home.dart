@@ -49,31 +49,59 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ]),
-      body: FutureBuilder<List<PostsModel>>(
-        future: PostService().getPosts("hot"),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (snapshot.hasError || snapshot.data == null) {
-            return const Center(
-              child: Text('Error'),
-            );
-          }
-          // Equivalent d'un if "??"
-          List<PostsModel> posts = snapshot.data ?? [];
-          return ListView.builder(
-            itemCount: posts.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(posts[index].title),
-                subtitle: Text(posts[index].author),
+      body: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: Icon(Icons.local_fire_department),
+                  label: Text("Hot")),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(5.0, 0, 5.0, 0),
+                child: ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: Icon(Icons.new_releases),
+                    label: Text("New")),
+              ),
+              ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: Icon(Icons.favorite),
+                  label: Text("Subscribed")),
+            ],
+          ),
+          FutureBuilder<List<PostsModel>>(
+            future: PostService().getPosts("new"),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (snapshot.hasError || snapshot.data == null) {
+                return const Center(
+                  child: Text('Error'),
+                );
+              }
+              // Equivalent d'un if "??"
+              List<PostsModel> posts = snapshot.data ?? [];
+              return Flexible(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  primary: false,
+                  itemCount: posts.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(posts[index].title),
+                      subtitle: Text(posts[index].author),
+                    );
+                  },
+                ),
               );
             },
-          );
-        },
+          ),
+        ],
       ),
     );
   }
