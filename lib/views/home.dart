@@ -4,10 +4,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redditech_epitech/models/post_model.dart';
 import 'package:flutter_redditech_epitech/services/post_service.dart';
 import 'package:flutter_redditech_epitech/utils/subreddit_search.dart';
+import 'package:flutter_redditech_epitech/views/profile.dart';
 import 'package:flutter_redditech_epitech/views/subredditpage.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String pageState = "hot";
+
+  getPageState(String res) async {
+    setState(() {
+      pageState = res;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +74,9 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  getPageState("hot");
+                },
                 icon: Icon(Icons.local_fire_department),
                 label: Text("Hot"),
                 style: ElevatedButton.styleFrom(
@@ -65,7 +86,9 @@ class HomePage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(5.0, 0, 5.0, 0),
                 child: ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    getPageState("new");
+                  },
                   icon: Icon(Icons.new_releases),
                   label: Text("New"),
                   style: ElevatedButton.styleFrom(
@@ -76,7 +99,9 @@ class HomePage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 5.0, 0),
                 child: ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    getPageState("sub");
+                  },
                   icon: Icon(Icons.favorite),
                   label: Text("Sub"),
                   style: ElevatedButton.styleFrom(
@@ -85,7 +110,14 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Profile(),
+                    ),
+                  );
+                },
                 icon: Icon(Icons.account_circle),
                 label: Text("Profile"),
                 style: ElevatedButton.styleFrom(
@@ -95,7 +127,7 @@ class HomePage extends StatelessWidget {
             ],
           ),
           FutureBuilder<List<PostsModel>>(
-            future: PostService().getPosts("new"),
+            future: PostService().getPosts(pageState),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(

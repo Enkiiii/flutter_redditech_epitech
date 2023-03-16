@@ -4,9 +4,7 @@ import 'package:flutter_redditech_epitech/services/profile_service.dart';
 import '../models/profiles_model.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({super.key, required this.username});
-
-  final String username;
+  const Profile({super.key});
 
   @override
   State<Profile> createState() => _ProfileState();
