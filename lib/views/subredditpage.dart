@@ -46,14 +46,14 @@ class _SubRedditPageState extends State<SubRedditPage> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/BackgroundRedditech.png'),
-                      fit: BoxFit.cover),
-                ),
+          : Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/BackgroundRedditech.png'),
+                    fit: BoxFit.cover),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
                     Stack(
@@ -98,13 +98,21 @@ class _SubRedditPageState extends State<SubRedditPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          const Text("By "),
-                          Text(subreddit!.name),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Color.fromARGB(0, 221, 220, 217)
+                                    .withOpacity(0.4)),
+                            child: Text(
+                              "By ${subreddit!.name}",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700, fontSize: 15),
+                            ),
+                          ),
                         ],
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.symmetric(vertical: 5),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -127,7 +135,18 @@ class _SubRedditPageState extends State<SubRedditPage> {
                         ],
                       ),
                     ),
-                    Text(subreddit!.description),
+                    Padding(
+                      padding: const EdgeInsets.all(1.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Color.fromARGB(0, 221, 220, 217)
+                                .withOpacity(0.5)),
+                        child: Text(
+                          subreddit!.description,
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
