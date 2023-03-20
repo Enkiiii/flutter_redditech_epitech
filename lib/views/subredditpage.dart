@@ -14,27 +14,13 @@ class SubRedditPage extends StatefulWidget {
 class _SubRedditPageState extends State<SubRedditPage> {
   SubredditModel? subreddit;
 
-  getIconSub() {
-    IconData iconSub;
-    String iconLabel;
-    if (subreddit!.subscribed == true) {
-      iconSub = Icons.favorite;
-      iconLabel = "Subbed";
-    } else {
-      iconSub = Icons.favorite_border;
-      iconLabel = "Not Subbed";
-    }
-    return iconSub;
-  }
-
-  getIconLabel() {
-    String iconLabel;
-    if (subreddit!.subscribed == true) {
-      iconLabel = "Subbed";
-    } else {
-      iconLabel = "Not Subbed";
-    }
-    return iconLabel;
+  ElevatedButton iconSubAndLabel({IconData? iconSub, String? iconLabel}) {
+    return ElevatedButton.icon(
+        onPressed: () {
+          setState(() {});
+        },
+        icon: Icon(iconSub),
+        label: Text(iconLabel!));
   }
 
   getSubreddit() async {
@@ -62,64 +48,88 @@ class _SubRedditPageState extends State<SubRedditPage> {
             )
           : Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Stack(
-                    children: <Widget>[
-                      // TODO : Superposer le titre et l'icone à la banner
-                      Image.network(subreddit!.bannerBackgroundImage),
-                      Padding(
-                        padding: const EdgeInsets.all(7.0),
-                        child: Image.network(
-                          subreddit!.communityIcon,
-                          height: 50,
-                          width: 50,
+              child: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/BackgroundRedditech.png'),
+                      fit: BoxFit.cover),
+                ),
+                child: Column(
+                  children: [
+                    Stack(
+                      children: <Widget>[
+                        Image.network(
+                          subreddit!.bannerBackgroundImage,
+                          fit: BoxFit.cover,
+                          height: 65,
                         ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(5, 5, 10, 0),
-                        child: Text(subreddit!.title),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
-                        child: Row(
-                          children: [
-                            const Text("By "),
-                            Text(subreddit!.name),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ElevatedButton.icon(
-                              onPressed: () {
-                                // TODO : Ajouter fonction pouvoir se sub ou desub
-                              },
-                              icon: Icon(getIconSub()),
-                              label: Text(getIconLabel())),
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              onSurface: Color.fromARGB(255, 95, 69, 30)),
-                          onPressed: null,
-                          child: Text(subreddit!.subscribers.toString()),
+                          padding: const EdgeInsets.all(7.0),
+                          child: Image.network(
+                            subreddit!.communityIcon,
+                            height: 50,
+                            width: 50,
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                  Text(subreddit!.description),
-                ],
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(0, 221, 217, 217)
+                                  .withOpacity(0.9),
+                            ),
+                            child: Expanded(
+                              child: Text(
+                                subreddit!.title,
+                                style: const TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.w800),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(5, 0, 10, 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          const Text("By "),
+                          Text(subreddit!.name),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: iconSubAndLabel(
+                                iconLabel: (subreddit!.subscribed == true)
+                                    ? "Subbed"
+                                    : "Not Subbed",
+                                iconSub: (subreddit!.subscribed == true)
+                                    ? Icons.favorite
+                                    : Icons.favorite_border),
+                          ),
+                          ElevatedButton(
+                            // style: ElevatedButton.styleFrom(
+                            //     onSurface: Color.fromARGB(255, 95, 69, 30)),
+                            onPressed: () {},
+                            child: Text(subreddit!.subscribers.toString()),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Text(subreddit!.description),
+                  ],
+                ),
               ),
             ),
     );
