@@ -55,7 +55,17 @@ class _ProfileState extends State<Profile> {
                       ),
                     ],
                   ),
-                  Text(profile!.description),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16.0, 16.0, 8.0, 8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(profile!.description),
+                      ],
+                    ),
+                  ),
+
+                  // TODO : Ajouter les settings dans la page profil
                 ],
               ),
             ),
