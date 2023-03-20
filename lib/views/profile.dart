@@ -36,12 +36,28 @@ class _ProfileState extends State<Profile> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : Column(
-              children: [
-                Text(profile!.username),
-                Image.network(profile!.picture),
-                Text(profile!.description),
-              ],
+          : Center(
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                        child: SizedBox(
+                          child: Image.network(profile!.picture),
+                          width: 50,
+                          height: 50,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
+                        child: Text(profile!.username),
+                      ),
+                    ],
+                  ),
+                  Text(profile!.description),
+                ],
+              ),
             ),
     );
   }

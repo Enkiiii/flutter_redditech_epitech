@@ -126,11 +126,12 @@ class PostService {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'User-Agent': 'Redditech:1234:1.0 (by /u/RichiePo99>)',
+          'User-Agent':
+              'flutter_project_enki:1234:1.0 (by /u/Global-Philosophy-68)',
           'Authorization': 'Bearer $token',
         },
       );
-      
+
       if (res.statusCode != 200) {
         throw Exception("Error getting subreddit");
       }
@@ -138,7 +139,6 @@ class PostService {
       Map<String, dynamic> body = jsonDecode(res.body);
       final SubredditModel sub = SubredditModel.fromJson(body);
       return sub;
-
     } catch (e) {
       if (kDebugMode) {
         print(e);

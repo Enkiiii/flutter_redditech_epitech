@@ -38,16 +38,37 @@ class _SubRedditPageState extends State<SubRedditPage> {
               child: CircularProgressIndicator(),
             )
           : Column(
-            children: [
-              Text(subreddit!.name),
-              Text(subreddit!.description),
-              Text(subreddit!.title),
-              Text(subreddit!.subscribed.toString()),
-              Text(subreddit!.subscribers.toString()),
-              Image.network(subreddit!.bannerBackgroundImage),
-              Image.network(subreddit!.communityIcon),
-            ],
-          ),
+              children: [
+                Row(
+                  children: [
+                    SizedBox(
+                        child: Image.network(
+                      subreddit!.communityIcon,
+                      height: 50,
+                      width: 50,
+                    )),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                      child: Text(subreddit!.title),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
+                      child: Row(
+                        children: [
+                          const Text("by "),
+                          Text(subreddit!.name),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                // TODO : Superposer la le titre et l'icone à la banner
+                Image.network(subreddit!.bannerBackgroundImage),
+                Text(subreddit!.description),
+                Text(subreddit!.subscribed.toString()),
+                Text(subreddit!.subscribers.toString()),
+              ],
+            ),
     );
   }
 }

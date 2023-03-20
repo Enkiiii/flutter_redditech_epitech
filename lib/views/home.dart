@@ -100,10 +100,10 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.fromLTRB(0, 0, 5.0, 0),
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    getPageState("sub");
+                    getPageState("random");
                   },
                   icon: Icon(Icons.favorite),
-                  label: Text("Sub"),
+                  label: Text("Top"),
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Color.fromARGB(255, 57, 53, 49),
                   ),
